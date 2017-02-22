@@ -93,8 +93,6 @@ public class Enemy : MonoBehaviour {
 
                 playerGameObject.GetComponent<Player>().enemyHit();
                 //gameLogic.playerDie();
-
-
                 
             }
 		} else if (hit.collider.gameObject.CompareTag("Enemy"))
@@ -121,7 +119,5 @@ public class Enemy : MonoBehaviour {
     {
         Instantiate(Resources.Load("koopaShell"));
     }
-
-    
 
 }

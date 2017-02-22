@@ -97,6 +97,7 @@ public class Player : MonoBehaviour
     IEnumerator damage()
     {
         stage--;
+        transform.localPosition -= new Vector3(0, 0.5f, 0);
         if (stage <= 0)
         {
             // player die
