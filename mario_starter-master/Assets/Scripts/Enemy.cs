@@ -98,6 +98,10 @@ public class Enemy : MonoBehaviour {
 		} else if (hit.collider.gameObject.CompareTag("Enemy"))
         {
             direction = -direction;
+        } else if (hit.collider.gameObject.CompareTag("Fireball"))
+        {
+            hit.collider.gameObject.SetActive(false);
+            die();
         }
 	}
 
