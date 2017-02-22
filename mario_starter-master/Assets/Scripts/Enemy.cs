@@ -85,7 +85,7 @@ public class Enemy : MonoBehaviour {
 
             if (playerGameObject.GetComponent<Player>().getMoveDir().y < -1)
             {
-                Debug.Log(playerGameObject.GetComponent<Player>().getMoveDir().y);
+                //Debug.Log(playerGameObject.GetComponent<Player>().getMoveDir().y);
                 playerGameObject.GetComponent<Player>().setVelY(10);
                 die();
             }
@@ -98,6 +98,10 @@ public class Enemy : MonoBehaviour {
 		} else if (hit.collider.gameObject.CompareTag("Enemy"))
         {
             direction = -direction;
+        } else if (hit.collider.gameObject.CompareTag("Fireball"))
+        {
+            hit.collider.gameObject.SetActive(false);
+            die();
         }
 	}
 
@@ -105,10 +109,10 @@ public class Enemy : MonoBehaviour {
     {
         //gameLogic.addScore(100);
 
-        //if (type == koopa)
-        //{
-        //    createShell();
-        //}
+        switch(type)
+        {
+            case enemyType.koopa  : createShell(); break;
+        }
 
         gameObject.SetActive(false);
 
@@ -117,7 +121,7 @@ public class Enemy : MonoBehaviour {
 
     private void createShell()
     {
-        Instantiate(Resources.Load("koopaShell"));
+        //Instantiate(Resources.Load("koopaShell"));
     }
 
 }
