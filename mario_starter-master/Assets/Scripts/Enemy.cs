@@ -3,14 +3,17 @@ using System.Collections;
 
 public class Enemy : MonoBehaviour {
 
-	// variables taken from CharacterController.Move example script
-	// https://docs.unity3d.com/ScriptReference/CharacterController.Move.html
+    // variables taken from CharacterController.Move example script
+    // https://docs.unity3d.com/ScriptReference/CharacterController.Move.html
+    public enum enemyType { goomba, koopa };
+    public enemyType type;
 	public float speed = 6.0F;
 	public float jumpSpeed = 8.0F;
 	public float gravity = 20.0F;
 	private Vector3 moveDirection = Vector3.zero;
 
 	GameObject playerGameObject; // this is a reference to the player game object
+    GameObject gameLogic;
 
 	public Vector3 direction = new Vector3(1.0f, 0.0f, 0.0f); // normalised direction the enemy will move in
 
@@ -23,6 +26,8 @@ public class Enemy : MonoBehaviour {
 		// find the player game object in the scene
 		playerGameObject = GameObject.FindGameObjectWithTag("Player");
 
+        //gameLogic = GameObject.FindGameObjectWithTag("GameController").GetComponent<gameLogic>();
+
 		// record the start position
 		start_position = transform.position;
 
@@ -32,6 +37,10 @@ public class Enemy : MonoBehaviour {
 
 	public void Reset()
 	{
+        // make enemy active
+
+        gameObject.SetActive(true);
+
 		// reset the enemy position to the start position
 		transform.position = start_position;
 
@@ -72,19 +81,43 @@ public class Enemy : MonoBehaviour {
 			// flip the direction of the enemy
 			direction = -direction;
 		} else if (hit.collider.gameObject.CompareTag ("Player")) {
-			// we've hit the player
+            // we've hit the player
 
-			// get player script component
-			Player playerComponent = playerGameObject.GetComponent<Player> ();
+            if (playerGameObject.GetComponent<Player>().getMoveDir().y < -1)
+            {
+                Debug.Log(playerGameObject.GetComponent<Player>().getMoveDir().y);
+                playerGameObject.GetComponent<Player>().setVelY(10);
+                die();
+            }
+            else {
 
-			// remove a life from the player
-			playerComponent.Lives = playerComponent.Lives - 1;
-
-			// reset the player
-			playerComponent.Reset();
-
-			// reset the enemy
-			Reset();
-		}
+                playerGameObject.GetComponent<Player>().enemyHit();
+                //gameLogic.playerDie();
+                
+            }
+		} else if (hit.collider.gameObject.CompareTag("Enemy"))
+        {
+            direction = -direction;
+        }
 	}
+
+    private void die()
+    {
+        //gameLogic.addScore(100);
+
+        //if (type == koopa)
+        //{
+        //    createShell();
+        //}
+
+        gameObject.SetActive(false);
+
+        return;
+    }
+
+    private void createShell()
+    {
+        Instantiate(Resources.Load("koopaShell"));
+    }
+
 }
