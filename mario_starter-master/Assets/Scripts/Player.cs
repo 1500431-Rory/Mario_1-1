@@ -3,11 +3,12 @@ using System.Collections;
 
 public class Player : MonoBehaviour {
 
-	// variables taken from CharacterController.Move example script
-	// https://docs.unity3d.com/ScriptReference/CharacterController.Move.html
-	public float speed = 6.0F;
+    // variables taken from CharacterController.Move example script
+    // https://docs.unity3d.com/ScriptReference/CharacterController.Move.html
+    public float speed = 6.0F;
 	public float jumpSpeed = 8.0F;
 	public float gravity = 20.0F;
+    public float coins;
 	private Vector3 moveDirection = Vector3.zero;
 
 	public int Lives = 3; // number of lives the player hs
@@ -53,4 +54,14 @@ public class Player : MonoBehaviour {
 		// make the call to move the character controller
 		controller.Move(moveDirection * Time.deltaTime);
 	}
+
+    public void y_set_vel(float new_vel)
+    {
+        moveDirection.y = new_vel;
+    }
+    
+    public void collect_powerup(int my_powerup)
+    {
+
+    }
 }

@@ -7,7 +7,7 @@ public class GameLogic : MonoBehaviour {
 	Player playerComponent;
 
 	public bool gameOver = false; // is the game over?
-
+    public int score = 0;
 	// Use this for initialization
 	void Start () {
 		// find the player component
@@ -24,4 +24,9 @@ public class GameLogic : MonoBehaviour {
 			Time.timeScale = 0.0f;
 		}
 	}
+
+    public void add_score(int score_to_be_added)
+    {
+        score += score_to_be_added;
+    }
 }
