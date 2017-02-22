@@ -52,12 +52,7 @@ public class power_up : MonoBehaviour {
         if (other.gameObject.tag == "Player")
         {
             // check if a player has collided with the powerup, allow them to collect it and destroy the powerup object
-
-            //other.GetComponent<Player>().collect_powerup(my_powerup_type);
-            //switch (my_powerup_type)
-            //{
-            //    case powerup_type.mushroom: other.GetComponent<Player>().collect_powerup(2); break;
-            //}
+            other.collider.gameObject.GetComponent<Player>().collect_powerup((int)my_powerup_type);
             Destroy(this.gameObject);
         }
         if(other.gameObject.CompareTag("Pipe"))
