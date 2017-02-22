@@ -8,11 +8,10 @@ public class power_up : MonoBehaviour {
     public powerup_type my_powerup_type;
     public float speed = 6.0f;
     public float gravity = 20.0f;
-    private Vector3 moveDirection = Vector3.zero;
+   
     public Vector3 direction = new Vector3(1.0f, 0.0f, 0.0f); // normalised direction the powerup will move in
-
+    Vector3 moveDirection = Vector3.zero;
     Vector3 start_position; // start position of the powerup
-
     Vector3 start_direction; // start direction of the powerup
 
     // Use this for initialization
@@ -28,13 +27,13 @@ public class power_up : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        // get character controller on the powerup
+        // get the character controller attached to the enemy game object
         CharacterController controller = GetComponent<CharacterController>();
 
-        // check to see if the powerup is on the ground
+        // check to see if the enemy is on the ground
         if (controller.isGrounded)
         {
-            // set character controller moveDirection to be the direction I want the powerup to move in
+            // set character controller moveDirection to be the direction I want the enemy to move in
             moveDirection = direction;
             moveDirection *= speed;
         }
@@ -56,6 +55,13 @@ public class power_up : MonoBehaviour {
             Destroy(this.gameObject);
         }
         if(other.gameObject.CompareTag("Pipe"))
+        {
+            // we've hit the pipe
+
+            // flip the direction of the enemy
+            direction = -direction;
+        }
+        if (other.gameObject.CompareTag("power_up"))
         {
             // we've hit the pipe
 
