@@ -3,9 +3,9 @@ using System.Collections;
 
 public class Player : MonoBehaviour {
 
-    // variables taken from CharacterController.Move example script
-    // https://docs.unity3d.com/ScriptReference/CharacterController.Move.html
-    public float speed = 6.0F;
+  // variables taken from CharacterController.Move example script
+  // https://docs.unity3d.com/ScriptReference/CharacterController.Move.html
+  public float speed = 6.0F;
 	public float jumpSpeed = 8.0F;
 	public float gravity = 20.0F;
     public float coins;
